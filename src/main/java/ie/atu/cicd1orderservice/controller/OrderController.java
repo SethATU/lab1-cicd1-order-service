@@ -10,6 +10,7 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
     private final OrderService service;
+
     public OrderController(OrderService service) { this.service = service; }
 
     @GetMapping
@@ -17,4 +18,9 @@ public class OrderController {
 
     @PostMapping
     public Order create(@RequestBody Order order) { return service.create(order); }
+
+    @GetMapping("/test-catalog/{productId}")
+    public String testCatalogConnection(@PathVariable Long productId) {
+        return service.testCatalogConnection(productId);
+    }
 }
