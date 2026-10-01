@@ -11,8 +11,11 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
     private final OrderService service;
+    private final OrderService orderService;
 
-    public OrderController(OrderService service) { this.service = service; }
+    public OrderController(OrderService service, OrderService orderService) { this.service = service;
+        this.orderService = orderService;
+    }
 
     @GetMapping
     public List<Order> getAll() { return service.getAll(); }
@@ -23,5 +26,10 @@ public class OrderController {
     @GetMapping("/test-catalog/{productId}")
     public ProductResponse testCatalogConnection(@PathVariable Long productId) {
         return service.testCatalogConnection(productId);
+    }
+
+    @GetMapping("/{orderId}/product")
+    public ProductResponse getProductById(@PathVariable("orderId") Long orderId) {
+        return orderService.getProductForOrder(orderId);
     }
 }
