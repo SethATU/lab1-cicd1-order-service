@@ -1,5 +1,6 @@
 package ie.atu.cicd1orderservice.controller;
 
+import ie.atu.cicd1orderservice.client.dto.ProductResponse;
 import ie.atu.cicd1orderservice.model.Order;
 import ie.atu.cicd1orderservice.service.OrderService;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class OrderController {
     public Order create(@RequestBody Order order) { return service.create(order); }
 
     @GetMapping("/test-catalog/{productId}")
-    public String testCatalogConnection(@PathVariable Long productId) {
+    public ProductResponse testCatalogConnection(@PathVariable Long productId) {
         return service.testCatalogConnection(productId);
     }
 }
